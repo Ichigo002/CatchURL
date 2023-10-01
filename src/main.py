@@ -3,25 +3,25 @@ import csvmanager as csv
 import downloader as dwn
 
 def main():
+
+    ans = str(input("Type download folder name: "))
+
     csvm = csv.CSVManager("data/urls.csv")
-    dwnl = dwn.Downloader()
+    dwnl = dwn.Downloader("downloads/" + ans)
 
-    print(csvm.fetch_nostat() )
     print("--------------------------")
-
+    
     for i in range(csvm.size()):
         fname = csvm.fetch_filename()
         furl = csvm.fetch_url()
-        dwnl.download_from_url(furl, fname)
-        print("-=-=-")
 
-"""
-    for i in range(15):
-        if not csvm.is_end_data():
-            print(csvm.fetch_url())
-            print(csvm.fetch_filename())
-            csvm.next()
-"""
+        if dwnl.shall_download(fname):
+            codec = dwnl.download_from_url(furl, fname)
+            csvm.update_status(codec)
+            print("-=-=-")
+        csvm.next()
+
+        
     
 
 

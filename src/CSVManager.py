@@ -3,27 +3,33 @@ import pandas as pd
 class CSVManager():
 
     #private vars
+    __filename__ = ""
     __urlcsv__ = None
     __curr__ = 0
     __curr_max__ = -1
     __end_data__ = False 
     __usecols__ = [[0, "filename"],
                    [1, "status"],
-                   [2, "url"],
-                   [3, "nostat"]]
+                   [2, "url"]]
 
 
     def __init__(self, filename):
-        self.load(filename)
+        self.__filename__ = filename
+        self.read() 
+        pd.set_option("display.max_rows", 2000)
         
-    def load(self, filename):
-        print(f"Loading csv file \"{filename}\"") 
+    def read(self):
+        print(f"Loading csv file \"{self.__filename__}\"") 
 
-        self.__urlcsv__ = pd.read_csv(filename)
+        self.__urlcsv__ = pd.read_csv(self.__filename__)
         self.__curr_max__ = self.__urlcsv__.__len__()
         self.__end_data__ = False
-        #print(self.__urlcsv__.iloc[3]["url"])
+        #self.__urlcsv__ = self.__urlcsv__.drop(columns=['Unnamed: 4'])
+        #print(self.__urlcsv__)
         
+    def write(self):
+        print(f"Writing to file") 
+        self.__urlcsv__.to_csv(self.__filename__, index=False )
 
     def is_end_data(self):
         return not self.__curr__ < self.__curr_max__
@@ -51,16 +57,13 @@ class CSVManager():
             self.next()
 
         return self.__get_curr_r_col__(self.__usecols__[0][0])
-
-
-    def fetch_nostat(self, auto_next = False):
-        if auto_next:
-            self.next()
-
-        return self.__get_curr_r_col__(self.__usecols__[3][0])
         
     def update_status(self, nostat):
-        pass     
+        df = self.__urlcsv__.copy()
+        
+        df.loc[self.__get_curr__(),  self.__usecols__[1][1]] = self.__get_name_of_nostat(nostat)
+        self.__urlcsv__ = df
+        self.write()
 
     def __get_name_of_nostat(self, nostat):
         rval = ""
@@ -69,6 +72,9 @@ class CSVManager():
                 rval = "Saved"
             case -1:
                 rval = "ERROR"
+            case -3:
+                rval = "NotDefined"
+ 
         return rval
 
 

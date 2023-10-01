@@ -29,4 +29,7 @@ class Downloader():
         print(f"File successfully downloaded")
         return 0
 
+    def shall_download(self, filename):
+        return not os.path.exists(self.__dwn_path__ + '/' + filename + ".mp4")
+
     
