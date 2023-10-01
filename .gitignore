@@ -6,6 +6,10 @@ __pycache__/
 # C extensions
 *.so
 
+# Include test files
+*.mp4
+
+
 # Distribution / packaging
 .Python
 build/
