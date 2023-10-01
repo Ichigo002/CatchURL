@@ -3,9 +3,12 @@ import csvmanager as csv
 
 def main():
     csvm = csv.CSVManager("data/urls.csv")
-    print(csvm.fetch_url(True))
-    print(csvm.fetch_filename(True))
-    print(csvm.fetch_url(True))
+
+    for i in range(15):
+        if not csvm.is_end_data():
+            print(csvm.fetch_url())
+            print(csvm.fetch_filename())
+            csvm.next()
 
 
 
