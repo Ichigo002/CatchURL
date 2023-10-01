@@ -1,13 +1,14 @@
 # Attempt 2 in this pice of shit
 import csvmanager as csv
 import downloader as dwn
+import pandas as pd
 
 def main():
 
-    #ans = str(input("Type download folder name: "))
+    df = pd.read_xml("data/extra-info.xml")
 
-    csvm = csv.CSVManager("data/urls.csv")
-    dwnl = dwn.Downloader( )
+    csvm = csv.CSVManager(df.iloc[0].iloc[0])
+    dwnl = dwn.Downloader(df.iloc[1].iloc[1])
 
     print("--------------------------")
     

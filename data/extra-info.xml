@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<paths>
+    <csv>
+        <filename>data/urls.csv</filename>
+    </csv>
+    <downloads>
+        <destination>downloads/testfolder</destination>
+    </downloads>
+</paths>
