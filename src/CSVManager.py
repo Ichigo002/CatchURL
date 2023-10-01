@@ -9,7 +9,8 @@ class CSVManager():
     __end_data__ = False 
     __usecols__ = [[0, "filename"],
                    [1, "status"],
-                   [2, "url"]]
+                   [2, "url"],
+                   [3, "nostat"]]
 
 
     def __init__(self, filename):
@@ -27,6 +28,9 @@ class CSVManager():
     def is_end_data(self):
         return not self.__curr__ < self.__curr_max__
  
+    def size(self):
+        return self.__curr_max__
+
 
     def next(self):
         self.__curr__ += 1
@@ -49,9 +53,24 @@ class CSVManager():
         return self.__get_curr_r_col__(self.__usecols__[0][0])
 
 
+    def fetch_nostat(self, auto_next = False):
+        if auto_next:
+            self.next()
+
+        return self.__get_curr_r_col__(self.__usecols__[3][0])
         
-    def update_status(self):
-        pass
+    def update_status(self, nostat):
+        pass     
+
+    def __get_name_of_nostat(self, nostat):
+        rval = ""
+        match nostat:
+            case 0:
+                rval = "Saved"
+            case -1:
+                rval = "ERROR"
+        return rval
+
 
     def __get_row__(self, iter=0):
         return self.__urlcsv__.iloc[iter]

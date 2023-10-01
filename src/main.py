@@ -6,6 +6,7 @@ def main():
     csvm = csv.CSVManager("data/urls.csv")
     dwnl = dwn.Downloader()
 
+    print(csvm.fetch_nostat() )
     print("--------------------------")
 
     for i in range(csvm.size()):
