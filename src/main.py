@@ -4,10 +4,10 @@ import downloader as dwn
 
 def main():
 
-    ans = str(input("Type download folder name: "))
+    #ans = str(input("Type download folder name: "))
 
     csvm = csv.CSVManager("data/urls.csv")
-    dwnl = dwn.Downloader("downloads/" + ans)
+    dwnl = dwn.Downloader( )
 
     print("--------------------------")
     
