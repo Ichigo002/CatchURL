@@ -5,6 +5,15 @@ import downloader as dwn
 def main():
     csvm = csv.CSVManager("data/urls.csv")
     dwnl = dwn.Downloader()
+
+    print("--------------------------")
+
+    for i in range(csvm.size()):
+        fname = csvm.fetch_filename()
+        furl = csvm.fetch_url()
+        dwnl.download_from_url(furl, fname)
+        print("-=-=-")
+
 """
     for i in range(15):
         if not csvm.is_end_data():
@@ -12,7 +21,7 @@ def main():
             print(csvm.fetch_filename())
             csvm.next()
 """
-
+    
 
 
     
