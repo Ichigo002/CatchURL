@@ -27,19 +27,19 @@ class Downloader():
                 print("DIR ERROR: ", e)
                 return -7
         
-        print(f"Start downloading \"{filename}\"")
+        print(f" Start downloading \"{filename}\"")
         fpath = self.__dwn_path__ + '/' + filename
         try:
             urllib.request.urlretrieve(url, filename=fpath, reporthook=self.__report_hook__)
             print(end="\n")
         except urllib.error.HTTPError:
-            print("HTTP ERROR: Forbidden, code 403. Cannot download")
+            print("  HTTP ERROR: Forbidden, code 403. Cannot download")
             return -4
         except Exception as e:
-            print("HTTP ERROR: ", e)
+            print("  HTTP ERROR: ", e)
             return -5
         
-        print(f"File successfully downloaded")
+        print(f" File successfully downloaded")
         return 0
 
     def __report_hook__(self, block_num, block_size, total_size):
@@ -48,6 +48,6 @@ class Downloader():
 
 
     def shall_download(self, filename):
-        return not os.path.exists(self.__dwn_path__ + '/' + filename + ".mp4")
+        return not os.path.exists(self.__dwn_path__ + '/' + filename)
 
     
