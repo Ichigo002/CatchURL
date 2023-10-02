@@ -44,6 +44,8 @@ def main():
           f"*Failed:  {dn_fails} file/s\n",
           f"*Skipped: {dn_skipped} file/s\n")
     cc.setcol_clear()
+    print()
+    os.system("pause")
 
 
 if __name__ == "__main__":
