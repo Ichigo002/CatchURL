@@ -9,6 +9,8 @@ __pycache__/
 # Include test files
 *.mp4
 
+my_env/
+
 
 # Distribution / packaging
 .Python
