@@ -46,5 +46,6 @@ def main():
     cc.setcol_clear()
 
 
-os.system("cls")
-main()
+if __name__ == "__main__":
+    os.system("cls")
+    main()
