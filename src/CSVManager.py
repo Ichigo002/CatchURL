@@ -19,7 +19,7 @@ class CSVManager():
         pd.set_option("display.max_rows", 2000)
         
     def read(self):
-        print(f"Loading csv file \"{self.__filename__}\"") 
+        print(f"[Loading csv file \"{self.__filename__}\"]") 
 
         self.__urlcsv__ = pd.read_csv(self.__filename__)
         self.__curr_max__ = self.__urlcsv__.__len__()
@@ -27,8 +27,7 @@ class CSVManager():
         #self.__urlcsv__ = self.__urlcsv__.drop(columns=['Unnamed: 4'])
         #print(self.__urlcsv__)
         
-    def write(self):
-        print(f"Writing to file") 
+    def write(self): 
         self.__urlcsv__.to_csv(self.__filename__, index=False )
 
     def is_end_data(self):
@@ -74,6 +73,14 @@ class CSVManager():
                 rval = "ERROR"
             case -3:
                 rval = "NotDefined"
+            case -4:
+                rval = "HTTP ERROR: Forbidden 403"
+            case -5:
+                rval = "HTTP ERROR"
+            case -6:
+                rval = "DIR ERROR: Cannot create directory"
+            case -7:
+                rval = "DIR ERROR"
  
         return rval
 

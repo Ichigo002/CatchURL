@@ -10,16 +10,18 @@ def main():
     csvm = csv.CSVManager(df.iloc[0].iloc[0])
     dwnl = dwn.Downloader(df.iloc[1].iloc[1])
 
-    print("--------------------------")
+    print("###")
     
     for i in range(csvm.size()):
-        fname = csvm.fetch_filename()
+        fname = csvm.fetch_filename() + ".mp4"
         furl = csvm.fetch_url()
 
         if dwnl.shall_download(fname):
             codec = dwnl.download_from_url(furl, fname)
             csvm.update_status(codec)
-            print("-=-=-")
+            print("###")
+        else:
+            print(f"File \"{fname}\" already exist. Skipping...")
         csvm.next()
 
         
