@@ -11,6 +11,14 @@ for example from www.cda.pl website.
 4. Optionally you can change destination folder name where files are gonna be saved.
 5. **Start your app & download what you wish! Good luck**
 
+### Linked packages
+<ul>
+<li>Pandas [v2.1.1]</li>
+<li>Colorama [v0.4.6]</li>
+</ul>
+
+Python version: 3.11.5
+
 ### Extra Info
 
 <ul>
