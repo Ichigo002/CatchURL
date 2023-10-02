@@ -1,0 +1,2 @@
+if ss.csv is input data prgoram will crash.
+fix /\ that, crash because there's one blank field
