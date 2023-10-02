@@ -2,14 +2,17 @@
 import csvmanager as csv
 import downloader as dwn
 import pandas as pd
+import colorcmd as cc
+import os
+
 
 def main():
 
     df = pd.read_xml("data/extra-info.xml")
-
+    cc.setcol_info()
     csvm = csv.CSVManager(df.iloc[0].iloc[0])
     dwnl = dwn.Downloader(df.iloc[1].iloc[1])
-
+    cc.setcol_clear()
     print("###")
 
     dn_success = 0
@@ -28,20 +31,20 @@ def main():
             else:
                 dn_fails += 1
         else:
+            cc.setcol_skip()
             print(f" File \"{fname}\" already exist. Skipping...")
             dn_skipped += 1
+        cc.setcol_clear()
         print("###")
         csvm.next()
-    
+        
+    cc.setcol_summary()
     print("Summary: \n",
           f"*Saved:   {dn_success} file/s\n",
           f"*Failed:  {dn_fails} file/s\n",
           f"*Skipped: {dn_skipped} file/s\n")
-
-        
-    
+    cc.setcol_clear()
 
 
-    
-if __name__ == "__main__":
-    main()
+os.system("cls")
+main()
