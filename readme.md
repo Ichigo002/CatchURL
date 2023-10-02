@@ -19,6 +19,11 @@ for example from www.cda.pl website.
 
 Python version: 3.11.5
 
+### FAQ
+
+1. When start downloading, it shows me error *Error. Cannot create directory. check if base folder 'downloads' exists.* <br>
+To fix that you must create in *CatchURL* create folder *downloads*.
+
 ### Extra Info
 
 <ul>
