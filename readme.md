@@ -15,6 +15,7 @@ for example from www.cda.pl website.
 <ul>
 <li>Pandas [v2.1.1]</li>
 <li>Colorama [v0.4.6]</li>
+<li>lxml [4.9.3]</li>
 </ul>
 
 Python version: 3.11.5
