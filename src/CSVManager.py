@@ -54,8 +54,11 @@ class CSVManager():
     def fetch_filename(self, auto_next = False):
         if auto_next:
             self.next()
+        fname = self.__get_curr_r_col__(self.__usecols__[0][0])
+        if not isinstance(fname, str):
+            fname = ""
 
-        return self.__get_curr_r_col__(self.__usecols__[0][0])
+        return fname
         
     def update_status(self, nostat):
         df = self.__urlcsv__.copy()
@@ -81,6 +84,8 @@ class CSVManager():
                 rval = "DIR ERROR: Cannot create directory"
             case -7:
                 rval = "DIR ERROR"
+            case -8:
+                rval = ""
  
         return rval
 

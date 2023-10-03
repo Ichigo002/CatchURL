@@ -18,6 +18,11 @@ class Downloader():
 
 
     def download_from_url(self, url, filename):
+        if filename == ".mp4":
+            cc.setcol_skip()
+            print(" Warning: Row is empty. Skipping...")
+            return -8
+
         if not os.path.exists(self.__dwn_path__):
             try:
                 os.mkdir(self.__dwn_path__)        
