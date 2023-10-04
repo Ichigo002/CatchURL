@@ -1,14 +1,14 @@
 # Attempt 2 in this pice of shit
+import pandas as pd
 import csvmanager as csv
 import downloader as dwn
-import pandas as pd
 import colorcmd as cc
 import os
 
 
 def main():
 
-    df = pd.read_xml("data/extra-info.xml")
+    df = pd.read_xml("data/config.xml")
     cc.setcol_info()
     csvm = csv.CSVManager(df.iloc[0].iloc[0])
     dwnl = dwn.Downloader(df.iloc[1].iloc[1])
