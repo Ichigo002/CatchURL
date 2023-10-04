@@ -29,6 +29,6 @@ To fix that you must create in *CatchURL* create folder *downloads*.
 
 <ul>
  <li>Author: Wiktor Bojanowski</li>
- <li>Date: 30.09.2023 - 03.10.2023</li> 
+ <li>Date: 09/10 2023</li> 
  <li>Written with Vim extension in VS Code</li> 
 </ul> 
