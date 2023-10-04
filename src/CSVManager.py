@@ -1,4 +1,6 @@
 import pandas as pd
+import os
+import colorcmd as cc
 
 class CSVManager():
 
@@ -21,6 +23,12 @@ class CSVManager():
     def read(self):
         print(f"[Loading csv file \"{self.__filename__}\"]") 
 
+        if not os.path.exists(self.__filename__):
+            cc.setcol_error()
+            print(" READ CSV ERROR: No such file: ", self.__filename__, "\n")
+            cc.setcol_clear()
+            os.system("pause")
+            os._exit(-1)
         self.__urlcsv__ = pd.read_csv(self.__filename__)
         self.__curr_max__ = self.__urlcsv__.__len__()
         self.__end_data__ = False

@@ -8,7 +8,15 @@ import os
 
 def main():
 
-    df = pd.read_xml("data/config.xml")
+    config_path = "data/config.xml"
+    if os.path.exists(config_path):
+        df = pd.read_xml(config_path)
+    else:
+        cc.setcol_error()
+        print("\n READ XML ERROR: No such file: ", config_path, "\n\n")
+        cc.setcol_clear()
+        return
+
     cc.setcol_info()
     csvm = csv.CSVManager(df.iloc[0].iloc[0])
     dwnl = dwn.Downloader(df.iloc[1].iloc[1])
@@ -44,10 +52,9 @@ def main():
           f"*Failed:  {dn_fails} file/s\n",
           f"*Skipped: {dn_skipped} file/s\n")
     cc.setcol_clear()
-    print()
-    os.system("pause")
 
 
 if __name__ == "__main__":
     os.system("cls")
     main()
+    os.system("pause")
