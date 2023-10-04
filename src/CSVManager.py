@@ -25,7 +25,7 @@ class CSVManager():
 
         if not os.path.exists(self.__filename__):
             cc.setcol_error()
-            print(" READ CSV ERROR: No such file: ", self.__filename__, "\n")
+            print(" READ CSV ERROR: No such file: \"", self.__filename__, "\"\n")
             cc.setcol_clear()
             os.system("pause")
             os._exit(-1)

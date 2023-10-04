@@ -13,7 +13,7 @@ def main():
         df = pd.read_xml(config_path)
     else:
         cc.setcol_error()
-        print("\n READ XML ERROR: No such file: ", config_path, "\n\n")
+        print("\n READ XML ERROR: No such file: \"", config_path, "\"\n\n")
         cc.setcol_clear()
         return
 
