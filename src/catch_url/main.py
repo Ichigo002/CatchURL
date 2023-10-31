@@ -1,8 +1,8 @@
 # Attempt 2 in this pice of shit
 import pandas as pd
-import csvmanager as csv
-import downloader as dwn
-import colorcmd as cc
+from ..catch_url.csvmanager import *
+from ..catch_url.downloader import *
+from ..utils import colorcmd as cc
 import os
 
 
@@ -18,8 +18,8 @@ def main():
         return
 
     cc.setcol_info()
-    csvm = csv.CSVManager(df.iloc[0].iloc[0])
-    dwnl = dwn.Downloader(df.iloc[1].iloc[1])
+    csvm = CSVManager(df.iloc[0].iloc[0])
+    dwnl = Downloader(df.iloc[1].iloc[1])
     cc.setcol_clear()
     print("###")
 
@@ -53,8 +53,7 @@ def main():
           f"*Skipped: {dn_skipped} file/s\n")
     cc.setcol_clear()
 
-
-if __name__ == "__main__":
+def more_main():
     os.system("cls")
     main()
     os.system("pause")

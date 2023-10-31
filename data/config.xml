@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <paths>
     <csv>
-        <filename>data\sss.csv</filename>
+        <filename>data\real-test.csv</filename>
     </csv>
     <downloads>
-        <destination>downloads\e</destination>
+        <destination>downloads\testnew</destination>
     </downloads>
 </paths>

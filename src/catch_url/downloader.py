@@ -2,8 +2,7 @@
 # Created by Wiktor Bojanowksi. eee lu wo ma. Kaichou wa maid sama!
 import urllib.request
 import os
-import progressbar as pgb
-import colorcmd as cc
+from ..utils import progress_bar, colorcmd as cc
 
 test_url = "https://vwaw501.cda.pl/RBgA-c8sHanoYBG0Jj42iA/1696200950/lq0751ce81093061a7090546f049e895bc.mp4"
 
@@ -55,7 +54,7 @@ class Downloader():
         return 0
 
     def __report_hook__(self, block_num, block_size, total_size):
-        pgb.progress_bar(block_num * block_size, total_size, 30)
+        progress_bar(block_num * block_size, total_size, 30)
 
 
 

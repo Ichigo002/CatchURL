@@ -1,6 +1,6 @@
 import pandas as pd
 import os
-import colorcmd as cc
+from ..utils import colorcmd as cc
 
 class CSVManager():
 
