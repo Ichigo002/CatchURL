@@ -1,2 +1,2 @@
 cls
-my_env\Scripts\python -u cli_catchurl.py
+env\Scripts\python -u cli_catchurl.py
