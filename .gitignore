@@ -10,6 +10,7 @@ __pycache__/
 *.mp4
 
 my_env/
+Release/
 
 
 # Distribution / packaging
