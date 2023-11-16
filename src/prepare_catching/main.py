@@ -7,6 +7,9 @@ from selenium.common.exceptions import NoSuchWindowException
 from ..utils.colorcmd import *
 from ..utils.system_utils import *
 from .usr_input_handling import *
+from .fetchers.f_cda import *
+from .fetchers.f_wbijam import *
+from .fetchers.fetcher_template import *
 
 from pandas import *
 
@@ -85,8 +88,15 @@ def main():
     while ans:
         vid = ""
         index += 1
+
+        fetcher = Fetcher_cda(dr)
+
         try:
-            vid = dr.find_elements(By.CLASS_NAME, "pb-video-player")[0].get_attribute("src")
+            # HERE GET VIDeo url
+            vid = fetcher.fetchVideo() 
+            if fetcher.getErrno() != Errnos.SUCCESS:
+                handle_driver_error(fetcher.getErrmsg(), dr)
+                
             fname = "error-filename"
             if pass_orig:
                 span = dr.find_elements(By.CLASS_NAME, "title-name")[0]
