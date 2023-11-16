@@ -58,7 +58,7 @@ def main():
     setcol_decorative()
     print("\n  ---=*=---")
 
-    url = "https://www.cda.pl"
+    url = "https://www.google.com"
 
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument("--disable-features=NetworkService")
@@ -89,14 +89,16 @@ def main():
         vid = ""
         index += 1
 
-        fetcher = Fetcher_cda(dr)
+       # fetcher = Fetcher_cda(dr)
+        fetcher = Fetcher_wbijam(dr)
 
         try:
             # HERE GET VIDeo url
             vid = fetcher.fetchVideo() 
+            print("vid url ", vid)
             if fetcher.getErrno() != Errnos.SUCCESS:
                 handle_driver_error(fetcher.getErrmsg(), dr)
-                
+
             fname = "error-filename"
             if pass_orig:
                 span = dr.find_elements(By.CLASS_NAME, "title-name")[0]

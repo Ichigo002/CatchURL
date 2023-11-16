@@ -20,8 +20,11 @@ class BaseFetcher:
     Return: URL video to download
     """
     def fetchVideo(self):
+        v = "FetchVideo() ERROR. Piece of shittt. fuck this!!!"
         try:
+            print("fetchVideo(self)")
             v = self._safeFetchVideo()
+            print("After fethcVideo")
         except Exception as e:
             self._errno = Errnos.EXCEPTION
             self._errmsg = e
