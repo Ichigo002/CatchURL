@@ -96,19 +96,34 @@ def main():
         critical_exit()
     
     setcol_success()
-    print("Webpage loaded successfully.")
+    print("Website loaded successfully.")
+    setcol_summary()
+    print(" --==##==--")
+    print(" Supported websites: ")
+    print(" => www.cda.pl")
+    print(" => wbijam.pl | only-players: cda.pl, dailymotion")
+    print(" --==##==--")
+
 
     fuck_off_cookies(dr)
 
     index = 0
+    fetcher = None
 
     ans = fetch_usr_inputYN("Are you ready to fetch first url?")
     while ans:
         vid = ""
         index += 1
 
-        fetcher = Fetcher_cda(dr)
-        #fetcher = Fetcher_wbijam(dr)
+        if dr.current_url.find("cda.pl") != -1:
+            fetcher = Fetcher_cda(dr)
+        elif dr.current_url.find("wbijam.pl") != -1:
+            fetcher = Fetcher_wbijam(dr)
+        else:
+            setcol_error()
+            print("This website isn't supported")
+            ans = fetch_usr_inputYN("Do you want fetch next url?")
+            continue
 
         try:
             # HERE GET VIDeo url
