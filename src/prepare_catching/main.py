@@ -45,6 +45,7 @@ def add_new_url(cdf, filename, url):
 
 def main():
     init_colors()
+    sys_pause()
 
     csv_name = fetch_any_usr_input("Type name of csv file where urls will be saved (example: 'testcsv')")
     
@@ -106,13 +107,13 @@ def main():
         vid = ""
         index += 1
 
-       # fetcher = Fetcher_cda(dr)
-        fetcher = Fetcher_wbijam(dr)
+        fetcher = Fetcher_cda(dr)
+        #fetcher = Fetcher_wbijam(dr)
 
         try:
             # HERE GET VIDeo url
             vid = fetcher.fetchVideo() 
-            print("vid url ", vid)
+            print("vid url: ", vid)
             if fetcher.getErrno() != Errnos.SUCCESS:
                 handle_driver_error(fetcher.getErrmsg(), dr)
 
@@ -138,7 +139,7 @@ def main():
     setcol_success()
     print(f"Successfully saved file: '{fn}'")
 
-    sys_pause("BREAK: [END PROGRAM]")
+    sys_pause("BREAK: [END PROGRAM]\n Press Enter key to continue")
 
     setcol_info()
     print("Closing Web driver . . .")
