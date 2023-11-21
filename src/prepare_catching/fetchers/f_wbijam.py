@@ -9,9 +9,17 @@ class Fetcher_wbijam(BaseFetcher):
                 return f.fetchVideo()
             case "www.dailymotion.com":
                 return self._dr.find_elements(By.TAG_NAME, "iframe")[0].get_attribute("src")
+            case _:
+                return None
             # future cases . . . 
 
     def _checkPlayer(self):
-        print("chekcPayere")
         src = self._dr.find_elements(By.TAG_NAME, "iframe")[0].get_attribute("src")
-        return src.split("/", 3)[2]
+        try:
+            t = src.split("/", 2)
+            return t[2]
+        except Exception as e:
+            self._errno = Errnos.EXCEPTION
+            self._errmsg = f"Something went wrong. Maybe webpage hasn't loaded yet."
+            return ""
+            

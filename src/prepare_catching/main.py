@@ -18,7 +18,7 @@ from pandas import *
 def handle_driver_error(e, dr):
     setcol_error()
     if(type(e) == NoSuchWindowException):
-        print("Chrome window has been closed. Cannot keep going with program.")
+        print("WebDriver window has been closed. Cannot keep going with program.")
     else:
         print("Critical Error occured: ", e)
     dr.quit()
@@ -45,7 +45,6 @@ def add_new_url(cdf, filename, url):
 
 def main():
     init_colors()
-    sys_pause()
 
     csv_name = fetch_any_usr_input("Type name of csv file where urls will be saved (example: 'testcsv')")
     
@@ -128,9 +127,16 @@ def main():
         try:
             # HERE GET VIDeo url
             vid = fetcher.fetchVideo() 
-            print("vid url: ", vid)
-            if fetcher.getErrno() != Errnos.SUCCESS:
+            if fetcher.getErrno() == Errnos.ERROR:
+                setcol_error()
+                print("main.py:129 from instruction 'fetcher.fetchVideo() popped out naughty error.")
                 handle_driver_error(fetcher.getErrmsg(), dr)
+            elif fetcher.getErrno() == Errnos.EXCEPTION:
+                setcol_error()
+                print("Not dangerous error :) ", fetcher.getErrmsg())
+                ans = fetch_usr_inputYN("Do you want fetch next url?")
+                continue
+
 
             fname = "error-filename"
             if pass_orig:
@@ -140,6 +146,8 @@ def main():
                 fname = pattern_fname.replace("%i", str(index))
             df = add_new_url(df, fname, vid)
         except Exception as e:
+            setcol_error()
+            print("main.py:128 instruction 'try' caught naughty error.")
             handle_driver_error(e, dr)
         finally:
             setcol_success()
