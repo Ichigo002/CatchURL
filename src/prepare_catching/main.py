@@ -11,6 +11,8 @@ from .fetchers.f_cda import *
 from .fetchers.f_wbijam import *
 from .fetchers.fetcher_template import *
 
+from shutil import which
+
 from pandas import *
 
 def handle_driver_error(e, dr):
@@ -60,11 +62,26 @@ def main():
 
     url = "https://www.google.com"
 
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument("--disable-features=NetworkService")
-    chrome_options.add_argument("--disable-gpu")
+    dr = None
+    if which('google-chrome') is not None: 
+        setcol_info()
+        print("Starting Chrome web driver...")
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument("--disable-features=NetworkService")
+        chrome_options.add_argument("--disable-gpu")
 
-    dr = webdriver.Chrome(chrome_options)
+        dr = webdriver.Chrome(chrome_options)
+    
+    elif which('firefox') is not None:
+        setcol_info()
+        print("Starting Firefox web driver...")
+
+        dr = webdriver.Firefox()
+    else:
+        setcol_error()
+        print("To proper work your OS has to have Firefox or Chrome.")
+        critical_exit()
+    
 
     setcol_info()
     print(f"Getting url: '{url}'")
@@ -124,5 +141,5 @@ def main():
     sys_pause("BREAK: [END PROGRAM]")
 
     setcol_info()
-    print("Closing chrome . . .")
+    print("Closing Web driver . . .")
     dr.quit()

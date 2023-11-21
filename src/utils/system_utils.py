@@ -9,5 +9,4 @@ def critical_exit():
 
 def sys_pause(text_info="Press any key to continue . . ."):
      setcol_clear()
-     print(text_info)
-     os.system("pause")
+     os.system(f'read -n1 -r -p "{text_info}" key')

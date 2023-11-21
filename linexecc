@@ -1,0 +1,4 @@
+#!/bin/bash
+# Use it for linux with "bash linexecc"
+clear
+env/bin/python3 -u cli_prepare_catching.py
