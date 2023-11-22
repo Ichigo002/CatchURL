@@ -8,6 +8,12 @@ def critical_exit():
     sys_pause()
     os._exit(-1)
 
+def escape_path(path : str):
+    if if_linux():
+        return path.replace("\\", "/")
+    else:
+        return path.replace("/", "\\")
+
 def sys_pause(text_info="Press Enter key to continue . . ."):
     setcol_clear()
     print()

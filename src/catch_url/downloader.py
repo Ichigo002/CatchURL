@@ -3,6 +3,7 @@
 import urllib.request
 import os
 from ..utils import progress_bar, colorcmd as cc
+from ..utils import system_utils as su
 
 test_url = "https://vwaw501.cda.pl/RBgA-c8sHanoYBG0Jj42iA/1696200950/lq0751ce81093061a7090546f049e895bc.mp4"
 
@@ -37,6 +38,7 @@ class Downloader():
         cc.setcol_clear()
         print(f" Start downloading \"{filename}\"")
         fpath = self.__dwn_path__ + '/' + filename
+        fpath = su.escape_path(fpath)
         try:
             urllib.request.urlretrieve(url, filename=fpath, reporthook=self.__report_hook__)
             print(end="\n")

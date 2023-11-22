@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <paths>
     <csv>
-        <filename>data\real-test.csv</filename>
+        <filename>data\example.csv</filename>
     </csv>
     <downloads>
         <destination>downloads\testnew</destination>

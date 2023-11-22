@@ -3,12 +3,15 @@ import pandas as pd
 from ..catch_url.csvmanager import *
 from ..catch_url.downloader import *
 from ..utils import colorcmd as cc
+from ..utils import system_utils as su
 import os
 
 
 def main():
 
     config_path = "data/config.xml"
+    config_path = su.escape_path(config_path)
+
     if os.path.exists(config_path):
         df = pd.read_xml(config_path)
     else:
@@ -18,8 +21,8 @@ def main():
         return
 
     cc.setcol_info()
-    csvm = CSVManager(df.iloc[0].iloc[0])
-    dwnl = Downloader(df.iloc[1].iloc[1])
+    csvm = CSVManager(su.escape_path(df.iloc[0].iloc[0]))
+    dwnl = Downloader(su.escape_path(df.iloc[1].iloc[1]))
     cc.setcol_clear()
     print("###")
 
@@ -54,6 +57,7 @@ def main():
     cc.setcol_clear()
 
 def more_main():
-    os.system("cls")
+    #os.system("cls")
     main()
-    os.system("pause")
+    #os.system("pause")
+    su.sys_pause()
