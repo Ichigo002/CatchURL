@@ -43,25 +43,26 @@ def add_new_url(cdf, filename, url):
     ndf = make_new_df(filename, url)
     return concat([cdf, ndf], ignore_index=True)
 
+
 def main():
     init_colors()
 
-    csv_name = "kurwa"#fetch_any_usr_input("Type name of csv file where urls will be saved (example: 'testcsv')")
+    csv_name = fetch_any_usr_input("Type name of csv file where urls will be saved (example: 'testcsv')")
     
 
-    pass_orig = False#fetch_usr_inputYN("Do you want use original video name to save")
-    pattern_fname = ""
+    pass_orig = fetch_usr_inputYN("Do you want use original video name to save")
+    pattern_fname = "fetched-video-catchurl-%i"
 
     if not pass_orig:
-        pattern_fname = "kurwavid"#fetch_any_usr_input("Type filename pattern (for instance: 'test-%') \n -> '%i' == index+1")
+        pattern_fname = fetch_any_usr_input("Type filename pattern (for instance: 'test-%') \n -> '%i' == index+1")
 
     df = DataFrame(columns=['filename', 'status', 'url'])
     
     setcol_decorative()
     print("\n  ---=*=---")
 
-    #url = "https://www.google.com"
-    url = "https://accelworld.wbijam.pl/odtwarzacz-_PLU_i3PZXb9BlAX6Qc_PLU_4_PLU_k8fEhdHYOqNOjP.html"
+    url = "https://www.google.com"
+    #url = "https://accelworld.wbijam.pl/odtwarzacz-_PLU_i3PZXb9BlAX6Qc_PLU_4_PLU_k8fEhdHYOqNOjP.html"
 
     dr = None
     if which('google-chrome') is not None: 
@@ -141,8 +142,17 @@ def main():
             if not break_v:
                 fname = "error-filename"
                 if pass_orig:
-                    span = dr.find_elements(By.CLASS_NAME, "title-name")[0]
-                    fname = span.find_elements(By.TAG_NAME, "span")[0].find_element(By.TAG_NAME, "h1").text
+                    _fn = fetcher.fetchVideoTitle()
+                    if _fn != None:
+                        fname = _fn
+                        if fetcher.getErrno == Errnos.EXC_NO_PRIM_TITLE:
+                            fname = f"{fname}-video-{index}"
+                            setcol_info()
+                            print(f"Video has got no specified name on this webpage. Used instead: {fname}")
+                    else:
+                        setcol_info()
+                        print("Video has got no specified name on this webpage. Used default built-in name")
+                        fname = pattern_fname.replace("%i", str(index))
                 else:
                     fname = pattern_fname.replace("%i", str(index))
                 df = add_new_url(df, fname, vid)

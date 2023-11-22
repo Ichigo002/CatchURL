@@ -9,6 +9,7 @@ class Errnos(Enum):
     SUCCESS = 0
     EXCEPTION = 1
     ERROR = -1
+    EXC_NO_PRIM_TITLE = 2
 
 class BaseFetcher:
     def __init__(self, dr: webdriver.Chrome) -> None:
@@ -28,6 +29,17 @@ class BaseFetcher:
             self._errmsg = e
         finally:
             return v
+        
+    def fetchVideoTitle(self):
+        v = "FetchVideo() ERROR. Piece of shittt. fuck this!!!"
+        try:
+            v = self._getVideoTitle()
+        except Exception as e:
+            self._errno = Errnos.ERROR
+            self._errmsg = e
+        finally:
+            return v
+
 
     def getErrno(self):
         return self._errno
@@ -40,4 +52,7 @@ class BaseFetcher:
     """
     def _safeFetchVideo(self):
         pass
+
+    def _getVideoTitle(self):
+        return None
     

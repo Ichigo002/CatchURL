@@ -17,6 +17,13 @@ class Fetcher_wbijam(BaseFetcher):
                 return None
             # future cases . . . 
 
+    def _getVideoTitle(self):
+        self._errno = Errnos.EXC_NO_PRIM_TITLE
+        self._errmsg = "EXC_NO_PRIM_TITLE means video title returned most accurate title"
+        dotted_title = self._dr.current_url.split("/")[2]
+        title = dotted_title.split(".")[0]
+        return title
+
     def _checkPlayer(self, src):
         try:
             t = src.split("/", 3)
