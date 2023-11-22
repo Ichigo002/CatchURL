@@ -148,7 +148,7 @@ def main():
                         if fetcher.getErrno() == Errnos.EXC_NO_PRIM_TITLE:
                             fname = f"{fname}-video-{index}"
                             setcol_info()
-                            print(f"Video has got no specified name on this webpage. Used instead: {fname}")
+                            print(f"Video has got no specified name on this webpage. Used instead: '{fname}'")
                     else:
                         setcol_info()
                         print("Video has got no specified name on this webpage. Used default built-in name")
