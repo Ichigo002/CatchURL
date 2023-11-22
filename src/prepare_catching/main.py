@@ -46,21 +46,22 @@ def add_new_url(cdf, filename, url):
 def main():
     init_colors()
 
-    csv_name = fetch_any_usr_input("Type name of csv file where urls will be saved (example: 'testcsv')")
+    csv_name = "kurwa"#fetch_any_usr_input("Type name of csv file where urls will be saved (example: 'testcsv')")
     
 
-    pass_orig = fetch_usr_inputYN("Do you want use original video name to save")
+    pass_orig = False#fetch_usr_inputYN("Do you want use original video name to save")
     pattern_fname = ""
 
     if not pass_orig:
-        pattern_fname = fetch_any_usr_input("Type filename pattern (for instance: 'test-%') \n -> '%i' == index+1")
+        pattern_fname = "kurwavid"#fetch_any_usr_input("Type filename pattern (for instance: 'test-%') \n -> '%i' == index+1")
 
     df = DataFrame(columns=['filename', 'status', 'url'])
     
     setcol_decorative()
     print("\n  ---=*=---")
 
-    url = "https://www.google.com"
+    #url = "https://www.google.com"
+    url = "https://accelworld.wbijam.pl/odtwarzacz-_PLU_i3PZXb9BlAX6Qc_PLU_4_PLU_k8fEhdHYOqNOjP.html"
 
     dr = None
     if which('google-chrome') is not None: 
@@ -125,6 +126,7 @@ def main():
             continue
 
         try:
+            break_v = False
             # HERE GET VIDeo url
             vid = fetcher.fetchVideo() 
             if fetcher.getErrno() == Errnos.ERROR:
@@ -134,24 +136,22 @@ def main():
             elif fetcher.getErrno() == Errnos.EXCEPTION:
                 setcol_error()
                 print("Not dangerous error :) ", fetcher.getErrmsg())
-                ans = fetch_usr_inputYN("Do you want fetch next url?")
-                continue
+                break_v = True
 
-
-            fname = "error-filename"
-            if pass_orig:
-                span = dr.find_elements(By.CLASS_NAME, "title-name")[0]
-                fname = span.find_elements(By.TAG_NAME, "span")[0].find_element(By.TAG_NAME, "h1").text
-            else:
-                fname = pattern_fname.replace("%i", str(index))
-            df = add_new_url(df, fname, vid)
+            if not break_v:
+                fname = "error-filename"
+                if pass_orig:
+                    span = dr.find_elements(By.CLASS_NAME, "title-name")[0]
+                    fname = span.find_elements(By.TAG_NAME, "span")[0].find_element(By.TAG_NAME, "h1").text
+                else:
+                    fname = pattern_fname.replace("%i", str(index))
+                df = add_new_url(df, fname, vid)
+                setcol_success()
+                print("URL has been fetched successfully")
         except Exception as e:
             setcol_error()
             print("main.py:128 instruction 'try' caught naughty error.")
             handle_driver_error(e, dr)
-        finally:
-            setcol_success()
-            print("URL has been fetched successfully")
 
         ans = fetch_usr_inputYN("Do you want fetch next url?")
 
