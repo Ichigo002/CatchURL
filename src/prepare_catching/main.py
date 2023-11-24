@@ -6,12 +6,11 @@ from selenium.common.exceptions import NoSuchWindowException
 
 from ..utils.colorcmd import *
 from ..utils.system_utils import *
+from ..utils.webdriver_handler import *
 from .usr_input_handling import *
 from .fetchers.f_cda import *
 from .fetchers.f_wbijam import *
 from .fetchers.fetcher_template import *
-
-from shutil import which
 
 from pandas import *
 
@@ -23,15 +22,6 @@ def handle_driver_error(e, dr):
         print("Critical Error occured: ", e)
     dr.quit()
     critical_exit()
-
-def fuck_off_cookies(dr:webdriver.Chrome):
-    try:
-        dr.find_element(By.CLASS_NAME, "fc-cta-consent").click()
-    except Exception as e:
-        setcol_error()
-        print("Cannot click cookies to stop annoying. It's not critical error ;)")
-    setcol_success()
-    print("(: Cookies clicked out automatically :)")
 
 def make_new_df(filename, url):
     return DataFrame(
@@ -62,28 +52,10 @@ def main():
     print("\n  ---=*=---")
 
     url = "https://www.google.com"
+    url = "https://wbijam.pl/"
     #url = "https://accelworld.wbijam.pl/odtwarzacz-_PLU_i3PZXb9BlAX6Qc_PLU_4_PLU_k8fEhdHYOqNOjP.html"
 
-    dr = None
-    if which('google-chrome') is not None: 
-        setcol_info()
-        print("Starting Chrome web driver...")
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_argument("--disable-features=NetworkService")
-        chrome_options.add_argument("--disable-gpu")
-
-        dr = webdriver.Chrome(chrome_options)
-    
-    elif which('firefox') is not None:
-        setcol_info()
-        print("Starting Firefox web driver...")
-
-        dr = webdriver.Firefox()
-    else:
-        setcol_error()
-        print("To proper work your OS has to have Firefox or Chrome.")
-        critical_exit()
-    
+    dr = getWebDriver()
 
     setcol_info()
     print(f"Getting url: '{url}'")
@@ -104,9 +76,8 @@ def main():
     print(" => www.cda.pl")
     print(" => wbijam.pl | only-players: cda.pl, dailymotion")
     print(" --==##==--")
-
-
-    fuck_off_cookies(dr)
+    
+    fuckOffCookies(dr)
 
     index = 0
     fetcher = None
