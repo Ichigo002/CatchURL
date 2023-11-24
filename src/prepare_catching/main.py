@@ -52,7 +52,7 @@ def main():
     print("\n  ---=*=---")
 
     url = "https://www.google.com"
-    url = "https://wbijam.pl/"
+    #url = "https://wbijam.pl/"
     #url = "https://accelworld.wbijam.pl/odtwarzacz-_PLU_i3PZXb9BlAX6Qc_PLU_4_PLU_k8fEhdHYOqNOjP.html"
 
     dr = getWebDriver()
